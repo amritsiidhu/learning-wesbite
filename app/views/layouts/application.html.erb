@@ -9,6 +9,21 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <nav class="navbar navbar-dark navbar-expand-md justify-content-center">
+      <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+        <ul class="navbar-nav mx-auto text-center">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">Home</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/learning">Learning</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Portolfio</a> 
+          </li>
+        </ul>
+      </div>
+    </nav>
   </head>
   <body>
     <%= yield %>
