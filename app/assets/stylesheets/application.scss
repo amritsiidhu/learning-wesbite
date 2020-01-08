@@ -13,11 +13,40 @@
  *= require_tree .
  *= require_self
  */
- body {
-  background-image: url('wolf.jpg');
-  background-position: center center;
+
+ body, html {
+  height: 100%;
+}
+.wolf-home {
+  background-image: url("wolf-home.jpg");
+  height: 100%;
+  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: cover;
+  color: white;
+  filter: grayscale(40%);
 }
 
+.wolf-learning {
+  background-image: url("wolf-learning.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  filter: grayscale(40%);
+}
+
+.header-title {
+  padding-top: 25%;
+  text-align: right;
+}
+.learning-title {
+  padding-top: 10%;
+  text-align: center;
+}
+
+.learning-card {
+  opacity: 0.5;
+  padding-top: 5%;
+}
