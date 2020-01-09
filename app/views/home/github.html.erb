@@ -6,42 +6,52 @@
         <h5 class="card-header">Setting up a second GitHub account</h5>
         <div class="card-body">
           <h5 class="card-title">1. Generating the SSH keys</h5>
-          <p class="card-text">Before generating an SSH key, check to see if there are any existing SSH keys: <span class="code-text">ls -al ~/.ssh</span></p>
-          <p class="card-text">If <span class="code-text">~/.ssh/id_rsa</span> is available, we can reuse it, or else we can first generate a key to the default  <span class="code-text">~/.ssh/id_rsa</span> by running:</p><p class="code-text-bg"> ssh-keygen -t rsa</p>
-          <p class="card-text">When asked save the keys, accept the default location by pressing enter. A private key and public key  <span class="code-text">~/.ssh/id_rsa.pub</span> will be created at the default ssh location <span class="code-text"> ~/.ssh/</span>.</p>
-          <p class="card-text">With another account you will need to create different SSH keys. The below code will generate the SSH keys, and saves the public key with the tag  <span class="code-text">"email@work_mail.com"</span> to  <span class="code-text">~/.ssh/id_rsa_work_user1.pub </span></p>
+          <p class="card-text">Before generating an SSH key, check to see if there are any existing SSH keys:</p>
+           <pre><code>
+  ls -al ~/.ssh
+          </code></pre>
+          <p class="card-text">If ~/.ssh/id_rsa is available, we can reuse it, or else we can first generate a key to the default ~/.ssh/id_rsa by running:</p>
+          <pre><code>
+  ssh-keygen -t rsa
+          </code></pre>
+          <p class="card-text">When asked save the keys to the default location by pressing enter. A private key and public key ~/.ssh/id_rsa.pub will be created at the default ssh location ~/.ssh/.</p>
+          <p class="card-text">With another account you will need to create different SSH keys. The below code will generate the SSH keys, and saves the public key with the tag “email@work_mail.com” to ~/.ssh/id_rsa_work_user1.pub</p>
           <pre><code>
   $ ssh-keygen -t rsa -C "email@work_mail.com" -f "id_rsa_work_user1"
-         </code></pre>
-        
+          </code></pre>
 
           <h5 class="card-title">2. Adding the new SSH key to the corresponding GitHub account</h5>
-          <p class="card-text">Copy the public key <span class="code-text">pbcopy < ~/.ssh/id_rsa.pub</span> and then log in to your personal GitHub account:</p>
+          <p class="card-text">Copy the public key and then log in to your personal GitHub account:</p>
+          <pre><code>
+  pbcopy < ~/.ssh/id_rsa.pub 
+           </code></pre>
           <p class="card-text">
             Go to Settings
             <li>Select SSH and GPG keys from the menu to the left.</li>
             <li>Click on New SSH key, provide a suitable title, and paste the key in the box below</li>
             <li>Click Add key — and you’re done!</li>
           </p>
-          <p class="card-text">Registering the new SSH Keys with the ssh-agent</p>
-          <p class="card-text">To use the keys, we have to register them with the ssh-agent on our machine. Ensure ssh-agent is running using the command<span class="code-text"> eval "$(ssh-agent -s)"</span>.</p>
+
+          <h5 class="card-title">3. Registering the new SSH Keys with the ssh-agent</h5>
+          <p class="card-text">To use the keys, we have to register them with the ssh-agent on our machine. Ensure ssh-agent is running using the command:</p>
+          <pre><code>
+  eval "$(ssh-agent -s)"
+          </code></pre>
           <p class="card-text">Add the keys to the ssh-agent like so:</p>
           <pre><code>
-  ~/.ssh/id_rsa 
-  ~/.ssh/id_rsa_work_user1
+  ssh-add ~/.ssh/id_rsa
+  ssh-add ~/.ssh/id_rsa_work_user1
           </code></pre>
 
-          <h5 class="card-title">3. Creating the SSH config File</h5>
-          <p class="card-text">The SSH config file will be available at <span class="code-text"> ~/.ssh/config</span>. Edit it if it exists, or else we can just create it.</p>
+          <h5 class="card-title">4. Creating the SSH config File</h5>
+          <p class="card-text">The SSH config file will be available at ~/.ssh/config. Edit it if it exists, or else we can just create it.</p>
           <pre><code>
   $ cd ~/.ssh/
   $ touch config           // Creates the file if not exists
   $ code config            // Opens the file in VS code, use any editor
           </code></pre>
-            
-       
           <p class="card-text"># Personal account, - the default config</p>
-          <pre><code>
+          <pre><code> 
   Host github.com
     HostName github.com
     User git
@@ -63,10 +73,25 @@
       <div class="card">
         <h5 class="card-header">Push to github with specific account</h5>
         <div class="card-body">
-          <h5 class="card-title">1. Set git config details</h5>
-          <p class="card-text">git config user.name "User 1"   // Updates git config user name</p>
-          <p class="card-text">git config user.email "user1@test.com"</p>
-          <p class="card-text">git clone git@github.com-work_user1:work_user1/repo_name.git</p> 
+          <h5 class="card-title">1. Set up repository with right account</h5>
+          <p class="card-text">Set git config details:</p>
+          <pre><code> 
+  git config user.name "User 1"   // Updates git config user name
+  git config user.email "user1@test.com"
+          </code></pre>
+          <p>Repositories can be cloned using the clone command Git provides:</p>
+          <pre><code> 
+  git clone git@github.com:personal_account_name/repo_name.git
+  git clone git@github.com-work_user1:work_user1/repo_name.git
+          </code></pre>
+          <p class="card-text">If we have the repository already cloned:</p>
+          <pre><code> 
+  git remote set-url origin git@github.com-worker_user1:worker_user1/repo_name.git
+          </code></pre>
+          <p class="card-text">If you are creating a new repository on local:</p>
+          <pre><code> 
+  git remote add origin git@github.com-work_user1:work_user1/repo_name.git 
+          </code></pre>
         </div>
       </div>
     </div>
